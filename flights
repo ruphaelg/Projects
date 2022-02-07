@@ -1,0 +1,109 @@
+//
+// flights.cpp
+// Purpose: this program compares two flights by returning the layover time and
+// total duration of the trip using their start and end times.
+// By: Ruphael Getahun
+// Date: 2/21/21
+
+
+
+
+
+#include <iostream>
+
+using namespace std;
+
+
+
+int main()
+{
+  
+    int f1starthr, f1startmin, f1endhr, f1endmin, f2starthr,f2startmin;
+    int f2endhr, f2endmin, layoverhr, layovermin, f1totalhr, f1totalmin; 
+    int f2totalhr, f2totalmin, totalhr, totalmin;
+  
+// Asking user for flight 1 start and end times and splitting times into hours 
+// and minutes.
+    cout << "Flight 1: ";
+    cin >> f1starthr;
+    cin >> f1startmin;
+    cin >>f1endhr;
+    cin >> f1endmin;
+  
+// Asking user for flight 2 start and end times and splitting times into hours 
+// and minutes.
+    cout << "Flight 2: ";
+    cin >> f2starthr; 
+    cin >> f2startmin;
+    cin >> f2endhr;
+    cin >> f2endmin;
+  
+// finds how many hours the layover is.
+    if (f2starthr < f1endhr) {
+        layoverhr = (f2starthr + 24 ) - f1endhr;
+    }
+    else {
+        layoverhr = f2starthr - f1endhr;
+    }
+  
+//finds how many minutes the layover is.
+    if (f1endmin > f2startmin) {
+        layoverhr = layoverhr - 1;
+        layovermin = (60 - f1endmin) + f2startmin;
+    }
+    else {
+        layovermin = f2startmin - f1endmin;
+  }
+
+//finds total hours of the first flight
+    if (f1endhr < f1starthr) {
+        f1totalhr = (f1endhr + 24 ) - f1starthr;
+    }
+    else {
+        f1totalhr = f1endhr - f1starthr;
+    }
+   
+//finds total min of the first flight
+    if (f1endmin < f1startmin) {
+        f1totalhr = f1totalhr - 1;
+        f1totalmin = (60 - f1startmin) + f1endmin;
+    }
+    else {
+        f1totalmin = f1endmin - f1startmin;
+    }
+  
+// finds total hours of the second flight
+     if (f2endhr < f2starthr) {
+         f2totalhr = (f2endhr + 24 ) - f2starthr;
+     }
+     else {
+         f2totalhr = f2endhr - f2starthr;
+     }
+   
+//finds total min of the second flight
+     if (f2endmin < f2startmin) {
+         f2totalhr = f2totalhr - 1;
+         f2totalmin = (60 - f2startmin) + f2endmin;
+     }
+     else {
+         f2totalmin = f2endmin - f2startmin;
+     }
+  
+// Finds total hours and minutes of travel time including layover
+     totalhr = layoverhr + f1totalhr + f2totalhr;
+    
+     totalmin = layovermin + f1totalmin + f2totalmin;
+  
+// makes sure that if total minutes is over 60 minutes, it adds onto total hours
+     if (totalmin >= 60) {
+         totalhr = totalhr + (totalmin / 60);
+         totalmin = totalmin % 60; 
+     }
+    
+     cout << "Layover: " << layoverhr << " hr " << layovermin << " min" << endl;
+     cout << "Total: " << totalhr << " hr " << totalmin << " min" << endl;
+  
+     return 0;
+}
+  
+  
